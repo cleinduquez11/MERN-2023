@@ -32,6 +32,42 @@ exercisesRouter.route('/add').post((req,res) => {
 
 });
 
+exercisesRouter.route('/:id').get((req,res) => {
+    const id = req.params.id;
+    Exercise.findById(id)
+    .then(exercise => res.json(exercise))
+    .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+exercisesRouter.route('/:id').delete((req,res) => {
+    const id = req.params.id;
+    Exercise.findByIdAndDelete(id)
+    .then(() => res.json("Exercise deleted"))
+    .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+
+exercisesRouter.route('/update/:id').patch((req,res) => {
+    const id = req.params.id;
+    Exercise.findById(id)
+    .then(exercise => {
+        exercise.username = req.body.username;
+        exercise.description = req.body.description;
+        exercise.duration = req.body.duration;
+        exercise.date = req.body.date;
+        exercise.save()
+        .then(()=>res.json('Exercise updated'))
+        .catch(err => res.status(400).json('Error: ' + err))
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+
+
+
 
 
 module.exports = exercisesRouter;

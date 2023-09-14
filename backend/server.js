@@ -3,6 +3,8 @@ const cors  = require("cors");
 const mongoose = require("mongoose");
 require("dotenv/config");
 
+const exercisesRouter = require('./Routes/exercises');
+const usersRouter = require('./Routes/users');
 
 const uri = process.env.ATLAS_URI;
 const app = express();
@@ -21,8 +23,6 @@ if (mongoose.ConnectionStates.connected) {
 }
 
 
-const exercisesRouter = require('./Routes/exercises');
-const usersRouter = require('./Routes/users');
 
 app.use('/exercises',exercisesRouter);
 
