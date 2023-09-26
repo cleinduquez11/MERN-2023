@@ -12,6 +12,16 @@ username: {
     trim:true,
     minlength: 3
 },
+password:{
+    type: String,
+    required: true,
+},
+isAdmin:{
+    type: Boolean,
+},
+accessToken:{
+    type: String
+}
 
 },
 {
